@@ -1,0 +1,251 @@
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   outline: none;
+   font-family: "Inconsolata", monospace;
+}
+
+html {
+   font-size: 62.5%;
+}
+
+.container {
+   height: 100vh;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+}
+
+.heading {
+   position: absolute;
+   top: 5rem;
+   font-size: 7rem;
+   font-weight: 300;
+   color: #f03535;
+   letter-spacing: 1rem;
+   text-shadow: .2rem .2rem .5rem #aaa;
+}
+
+.heading__span-1 {
+   position: relative;
+   z-index: 10;
+}
+
+.heading__span-2 {
+   position: relative;
+}
+
+.heading__span-2::after {
+   content: '';
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   background-color: #fff;
+   right: -100%;
+   transition: right .6s;
+}
+
+.change .heading__span-2::after {
+   right: 100%;
+}
+
+.buttons {
+   position: absolute;
+   top: 5rem;
+   left: 5rem;
+   display: flex;
+   flex-direction: column;
+}
+
+.buttons button {
+   width: 10rem;
+   height: 4rem;
+   font-size: 2rem;
+   color: #f03535;
+   border: none;
+   border-radius: 5rem;
+   letter-spacing: .1rem;
+   box-shadow: .3rem .3rem .8rem #eee;
+   margin: 1rem 0;
+   cursor: pointer;
+   transition: background-color .3s;
+}
+
+.form {
+   display: flex;
+   flex-direction: column;
+   z-index: 100;
+}
+
+.form input {
+   width: 50rem;
+   height: 5rem;
+   background-color: #fff;
+   font-size: 1.7rem;
+   padding: 0 2rem;
+   letter-spacing: .2rem;
+}
+
+.form-input {
+   box-shadow: .3rem .3rem .5rem #eee inset;
+   color: #888;
+   border: none;
+   border-radius: 5rem;
+   transition: box-shadow .3s;
+}
+
+.success .form-input {
+   border: .1rem solid #46e75b;
+}
+
+.form-input:focus {
+   box-shadow: .5rem .5rem 1rem #eee inset;
+}
+
+.form-input__wrapper { 
+   margin: 1.5rem 0;
+   position: relative;
+}
+
+.form-input__wrapper:nth-child(1), 
+.form-input__wrapper:nth-child(4) {
+   visibility: hidden;
+   opacity: 0;
+   transition: all .3s;
+}
+
+.change .form-input__wrapper:nth-child(1), 
+.change .form-input__wrapper:nth-child(4) {
+   visibility: visible;
+   opacity: 1;
+   transition: all .3s .3s;
+}
+
+.message {
+   position: absolute;
+   left: 2rem;
+   font-size: 1.2rem;
+   font-weight: 700;
+   letter-spacing: .1rem;
+   text-transform: uppercase;
+   margin-top: 1rem;
+   color: #f55e5e;
+   visibility: hidden;
+   opacity: 0;
+   transition: opacity .3s;
+}
+
+.error .message {
+   visibility: visible;
+   opacity: 1;
+}
+
+.form-btn {
+   box-shadow: .5rem .5rem 1rem #ddd;
+   color: #f03535;
+   margin: 2rem 0;
+   letter-spacing: .2rem;
+   font-weight: bold;
+   border: none;
+   border-radius: 5rem;
+   cursor: pointer;
+   position: relative;
+   top: -6.5rem;
+   transition: box-shadow .3s, top .3s .3s;
+}
+
+.change .form-btn {
+   top: 1rem;
+   transition: top .3s .3s;
+}
+
+.form-btn:hover {
+   box-shadow: .5rem .5rem 2rem #ddd;
+} 
+
+.form-bg {
+   position: absolute;
+   width: 65rem;
+   height: 65rem;
+   box-shadow: 1.5rem 1.5rem 1.5rem #ddd;
+   transform: rotate(45deg);
+}
+
+.signIn-btn {
+   background-color: #e7e7e7;
+}
+
+.change .signIn-btn {
+   background-color: #fff;
+}
+
+.signUp-btn {
+   background-color: #fff;
+}
+
+.change .signUp-btn {
+   background-color: #e7e7e7;
+}
+
+@media (max-width: 1400px) {
+   .form-bg {
+      transform: rotate(0);
+      height: 55rem;
+   }
+}
+
+@media (max-width: 1000px) {
+   .heading {
+      font-size: 5rem;
+   }
+
+   .form-bg {
+      width: 55rem;
+      height: 50rem;
+      margin-bottom: 10rem;
+   }
+
+   .form input {
+      width: 40rem;
+   }
+}
+
+@media (max-width: 700px) { 
+   html {
+      font-size: 55%;
+   }
+
+   .heading {
+      font-size: 4rem;
+      top: 2rem;
+   }
+   
+   .buttons {
+      left: 2rem;
+      top: 2rem;
+   }
+
+   .buttons button { 
+      width: 7rem;
+      height: 3rem;
+      font-size: 1.4rem;
+   }
+
+   .form-bg {
+      height: 45rem;
+      width: 45rem;
+   }
+
+   .form input {
+      width: 35rem;
+   }
+}
+
+@media (max-width: 700px) { 
+   html {
+      font-size: 42%;
+   }
+}
