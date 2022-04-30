@@ -22,31 +22,48 @@ const clearForm = () => {
    if (formBtn.disabled) {
       formBtn.disabled = false;
    };
-   if (document.querySelector('.success-message')) {
-      document.querySelector('.success-message').remove();
+   if (document.querySelector('.message')) {
+      document.querySelector('.message').remove();
    }
 };
 
-//Error function
+//Error functions
 const error = (input, message) => {
    const inputWrapper = input.parentElement;
    inputWrapper.className = 'form-input__wrapper error';
-   inputWrapper.querySelector('.message').textContent = message;
+   inputWrapper.querySelector('.message-error').textContent = message;
 };
 
-//Success function
+const showUserError = (input, form) => {
+   const message = document.createElement('div');
+   message.classList.add('message');
+   message.innerHTML = `
+      <span class="message__error-icon"></span>
+      <p class="message__text">Ooops... Something went wrong ;(</p>
+   `;
+   form.append(message);
+   //disabling form button
+   input.disabled = true;
+   //clear message
+   setTimeout(() => {
+      message.remove();
+      input.disabled = false;
+   }, 3000);
+}
+
+//Success functions
 const success = (input) => {
    const inputWrapper = input.parentElement;
    inputWrapper.className = 'form-input__wrapper success';
 };
 
-const successfullyInst = (input, form) => {
+const showUserSuccess = (input, form) => {
    //show user that signing is successfull
    const message = document.createElement('div');
-   message.classList.add('success-message');
+   message.classList.add('message');
    message.innerHTML = `
       <i class="fas fa-check"></i>
-      <p class="success-message__text">Successfully signed ${form.classList[1] === 'sign-in' ? 'in' : 'up'}</p>
+      <p class="message__text">Successfully signed ${form.classList[1] === 'sign-in' ? 'in' : 'up'}</p>
    `;
    form.append(message);
    //disabling form button
@@ -143,12 +160,6 @@ function postData(form) {
       e.preventDefault();
       //check correctness
       if (isCorrect(form)) {
-         //creating xml http request
-         const request = new XMLHttpRequest();
-         //request initialization
-         request.open('POST', 'server.php')
-         //setting header request to json data
-         request.setRequestHeader('Content-type', 'application/json');
          //structure form data into key-value object
          const formData = new FormData(form);
          //turning FormData into JSON format
@@ -156,18 +167,53 @@ function postData(form) {
          formData.forEach((value, key) => {
             obj[key] = value;
          });
-         const json = JSON.stringify(obj);
-         //sending formData object
-         request.send(json);
-         //Actions when request loaded
-         request.addEventListener('load', () => {
-            //checking if request status is successful
-            if (request.status === 200) {
-               successfullyInst(formBtn, form);
-            };
-         });
+         fetch('server.php', {
+            method: 'POST',
+            headers: {
+               'Content-type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+         })
+         .then(data => data.text())
+         .then(data => {
+            console.log(data);
+            showUserSuccess(formBtn, form);
+         })
+         .catch(() => {
+            showUserError(formBtn, form);
+         })
+         .finally(() => {
+            setTimeout(() => {
+               clearForm();
+            }, 4000);
+         })
       };
    });
 };
 
 postData(form);
+
+//Posting data using xmlhttp:
+//  //creating xml http request
+//  const request = new XMLHttpRequest();
+//  //request initialization
+//  request.open('POST', 'server.php')
+//  //setting header request to json data
+//  request.setRequestHeader('Content-type', 'application/json');
+//  //structure form data into key-value object
+//  const formData = new FormData(form);
+//  //turning FormData into JSON format
+//  const obj = {};
+//  formData.forEach((value, key) => {
+//     obj[key] = value;
+//  });
+//  const json = JSON.stringify(obj);
+//  //sending formData object
+//  request.send(json);
+//  //Actions when request loaded
+//  request.addEventListener('load', () => {
+//     //checking if request status is successful
+//     if (request.status === 200) {
+//        successfullyInst(formBtn, form);
+//     };
+//  });

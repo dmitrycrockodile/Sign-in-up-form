@@ -124,7 +124,7 @@ html {
    transition: all .3s .3s;
 }
 
-.message {
+.message-error {
    position: absolute;
    left: 2rem;
    font-size: 1.2rem;
@@ -138,7 +138,7 @@ html {
    transition: opacity .3s;
 }
 
-.error .message {
+.error .message-error {
    visibility: visible;
    opacity: 1;
 }
@@ -200,13 +200,13 @@ html {
    background-color: #e7e7e7;
 }
 
-.success-message {
+.message {
    display: flex;
    justify-content: center;
    align-items: center;
 }
 
-.success-message i {
+.message i {
    font-size: 1.9rem;
    color: #46e75b;
    border-radius: 50%;
@@ -214,10 +214,30 @@ html {
    padding: .5rem;
 }
 
-.success-message__text {
+.message__text {
    margin-left: 1.5rem;
    font-size: 2rem;
    color: grey;
+}
+
+.message__error-icon {
+   width: 3.2rem;
+   height: 3px;
+   background-color: #f03535;
+   transform: rotate(45deg);
+   display: inline-block;
+   position: relative;
+}
+
+.message__error-icon::after {
+   content: '';
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 3.2rem;
+   height: 3px;
+   background-color: #f03535;
+   transform: rotate(90deg);
 }
 
 @media (max-width: 1400px) {
