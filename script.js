@@ -142,7 +142,7 @@ function postData(form) {
    form.addEventListener('submit', (e) => {
       e.preventDefault();
       //check correctness
-      if (isCorrect(form) === true) {
+      if (isCorrect(form)) {
          //creating xml http request
          const request = new XMLHttpRequest();
          //request initialization
