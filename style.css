@@ -166,6 +166,16 @@ html {
    box-shadow: .5rem .5rem 2rem #ddd;
 } 
 
+.form-btn:disabled {
+   color: #888;
+   background-color: rgb(212, 234, 255);
+   cursor: default;
+}
+
+.form-btn:disabled:hover {
+   box-shadow: .5rem .5rem 1rem #ddd;
+}
+
 .form-bg {
    position: absolute;
    width: 65rem;
@@ -188,6 +198,26 @@ html {
 
 .change .signUp-btn {
    background-color: #e7e7e7;
+}
+
+.success-message {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.success-message i {
+   font-size: 1.9rem;
+   color: #46e75b;
+   border-radius: 50%;
+   border: 1.5px solid #46e75b;
+   padding: .5rem;
+}
+
+.success-message__text {
+   margin-left: 1.5rem;
+   font-size: 2rem;
+   color: grey;
 }
 
 @media (max-width: 1400px) {
